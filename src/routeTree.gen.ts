@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as MeetingSummarizerRouteImport } from './routes/meeting-summarizer'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as TaskPlannerRouteImport } from './routes/task-planner'
+import { Route as TasksRouteImport } from './routes/tasks'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const TaskPlannerRoute = TaskPlannerRouteImport.update({
   path: '/task-planner',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TasksRoute = TasksRouteImport.update({
+  id: '/tasks',
+  path: '/tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/meeting-summarizer': typeof MeetingSummarizerRoute
   '/research': typeof ResearchRoute
   '/task-planner': typeof TaskPlannerRoute
+  '/tasks': typeof TasksRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/meeting-summarizer': typeof MeetingSummarizerRoute
   '/research': typeof ResearchRoute
   '/task-planner': typeof TaskPlannerRoute
+  '/tasks': typeof TasksRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,21 @@ export interface FileRoutesById {
   '/meeting-summarizer': typeof MeetingSummarizerRoute
   '/research': typeof ResearchRoute
   '/task-planner': typeof TaskPlannerRoute
+  '/tasks': typeof TasksRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/meeting-summarizer' | '/research' | '/task-planner'
+  fullPaths:
+    '/' | '/meeting-summarizer' | '/research' | '/task-planner' | '/tasks'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/meeting-summarizer' | '/research' | '/task-planner'
-  id: '__root__' | '/' | '/meeting-summarizer' | '/research' | '/task-planner'
+  to: '/' | '/meeting-summarizer' | '/research' | '/task-planner' | '/tasks'
+  id:
+    | '__root__'
+    | '/'
+    | '/meeting-summarizer'
+    | '/research'
+    | '/task-planner'
+    | '/tasks'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +83,7 @@ export interface RootRouteChildren {
   MeetingSummarizerRoute: typeof MeetingSummarizerRoute
   ResearchRoute: typeof ResearchRoute
   TaskPlannerRoute: typeof TaskPlannerRoute
+  TasksRoute: typeof TasksRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TaskPlannerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tasks': {
+      id: '/tasks'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof TasksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +131,7 @@ const rootRouteChildren: RootRouteChildren = {
   MeetingSummarizerRoute: MeetingSummarizerRoute,
   ResearchRoute: ResearchRoute,
   TaskPlannerRoute: TaskPlannerRoute,
+  TasksRoute: TasksRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
