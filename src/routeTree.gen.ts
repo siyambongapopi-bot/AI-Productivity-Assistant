@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HistoryRouteImport } from './routes/history'
 import { Route as MeetingSummarizerRouteImport } from './routes/meeting-summarizer'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as TaskPlannerRouteImport } from './routes/task-planner'
@@ -18,6 +19,11 @@ import { Route as TasksRouteImport } from './routes/tasks'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MeetingSummarizerRoute = MeetingSummarizerRouteImport.update({
@@ -43,6 +49,7 @@ const TasksRoute = TasksRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/history': typeof HistoryRoute
   '/meeting-summarizer': typeof MeetingSummarizerRoute
   '/research': typeof ResearchRoute
   '/task-planner': typeof TaskPlannerRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/history': typeof HistoryRoute
   '/meeting-summarizer': typeof MeetingSummarizerRoute
   '/research': typeof ResearchRoute
   '/task-planner': typeof TaskPlannerRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/history': typeof HistoryRoute
   '/meeting-summarizer': typeof MeetingSummarizerRoute
   '/research': typeof ResearchRoute
   '/task-planner': typeof TaskPlannerRoute
@@ -66,12 +75,24 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/meeting-summarizer' | '/research' | '/task-planner' | '/tasks'
+    | '/'
+    | '/history'
+    | '/meeting-summarizer'
+    | '/research'
+    | '/task-planner'
+    | '/tasks'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/meeting-summarizer' | '/research' | '/task-planner' | '/tasks'
+  to:
+    | '/'
+    | '/history'
+    | '/meeting-summarizer'
+    | '/research'
+    | '/task-planner'
+    | '/tasks'
   id:
     | '__root__'
     | '/'
+    | '/history'
     | '/meeting-summarizer'
     | '/research'
     | '/task-planner'
@@ -80,6 +101,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HistoryRoute: typeof HistoryRoute
   MeetingSummarizerRoute: typeof MeetingSummarizerRoute
   ResearchRoute: typeof ResearchRoute
   TaskPlannerRoute: typeof TaskPlannerRoute
@@ -93,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/meeting-summarizer': {
@@ -128,6 +157,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HistoryRoute: HistoryRoute,
   MeetingSummarizerRoute: MeetingSummarizerRoute,
   ResearchRoute: ResearchRoute,
   TaskPlannerRoute: TaskPlannerRoute,
