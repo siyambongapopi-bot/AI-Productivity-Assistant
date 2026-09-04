@@ -74,7 +74,7 @@ function Dashboard() {
       description="Here is your productivity snapshot. Small, focused blocks of work beat long unstructured hours."
     >
       <div className="space-y-8">
-        <section aria-label="Overview" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        <section aria-label="Overview" className="grid grid-cols-2 gap-4 xl:grid-cols-5">
           {stats.map(({ label, value, icon: Icon }) => (
             <div key={label} className="surface-card p-5">
               <div className="flex items-center justify-between">
