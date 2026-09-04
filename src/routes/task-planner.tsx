@@ -314,7 +314,16 @@ function TaskPlanner() {
                 )}
 
                 {plan.days?.map((d) => (
-                  <Section key={d.day} title={d.day}>
+                  <Section
+                    key={d.day}
+                    title={
+                      !d.day || /uncertain|unspecified/i.test(d.day)
+                        ? mode === "weekly"
+                          ? "Planned day"
+                          : "Today"
+                        : d.day
+                    }
+                  >
                     <div className="overflow-x-auto">
                       <Table>
                         <TableHeader>

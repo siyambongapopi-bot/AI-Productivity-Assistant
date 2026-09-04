@@ -74,7 +74,7 @@ function Dashboard() {
       description="Here is your productivity snapshot. Small, focused blocks of work beat long unstructured hours."
     >
       <div className="space-y-8">
-        <section aria-label="Overview" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        <section aria-label="Overview" className="grid grid-cols-2 gap-4 xl:grid-cols-5">
           {stats.map(({ label, value, icon: Icon }) => (
             <div key={label} className="surface-card p-5">
               <div className="flex items-center justify-between">
@@ -88,7 +88,7 @@ function Dashboard() {
 
         <section aria-label="Quick actions" className="space-y-3">
           <h2 className="text-lg font-semibold">Quick Actions</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-5">
             {QUICK_ACTIONS.map(({ to, label, icon: Icon }) => (
               <Link
                 key={label}
