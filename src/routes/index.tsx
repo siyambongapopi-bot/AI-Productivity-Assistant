@@ -88,7 +88,7 @@ function Dashboard() {
 
         <section aria-label="Quick actions" className="space-y-3">
           <h2 className="text-lg font-semibold">Quick Actions</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-5">
             {QUICK_ACTIONS.map(({ to, label, icon: Icon }) => (
               <Link
                 key={label}
