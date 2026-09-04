@@ -248,7 +248,10 @@ function MeetingSummarizer() {
                         duration: "",
                         notes: `Owner: ${a.owner}`,
                       }));
-                      if (!items.length) return toast.error("No action items to create");
+                      if (!items.length) {
+                        toast.error("No action items to create");
+                        return;
+                      }
                       addMany(items);
                       log({
                         kind: "task",
